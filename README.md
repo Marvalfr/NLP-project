@@ -3,18 +3,20 @@
 
 ### Problem Statement
 
-This project proposes a classification model that can more accurately identify the subreddit a post belongs to, based only on the title. The explored subreddits AskMen and AskWomen. Both subreddits were created in 2010 and have over 3 million subscribers.
-Along with accurately predicting posts' association with subreddits, I also wanted to find the key words that were the best predictors, first for both subreddits combined and then for each separately.
+Israel is a country in the Middle East that was established in 1948 as a homeland for Jewish people. It is the only Jewish-majority country in the world and has a population of over 9 million people. The relationship between Israel and Jewish people around the world is complex, with many diaspora Jews feeling a strong connection to the state and its history, while others may have criticisms of its government and policies. Overall, Israel plays a central role in Jewish identity and culture and is considered by many to be a symbol of Jewish continuity and resilience.
+
+The relationship between Israel and non-Israeli Jews was the inspiration for my project. I used natural language processing (NLP) to analyze the discussions in two subreddits: one dedicated to Israel and the other dedicated to Jewish culture.
 
 ### Executive Summary
 
-In this project, I explore data collected through Reddit's Pushshift API to classify posts to either the AskWomen or AskMen subreddit. The data analyzed consists of the recent 3,000 posts (submissions) from either subreddit as of April 29th and May 1st 2022 (respectively). As the request limit for Reddit's Pushshift API is 100 requests per minute, all of the data for this notebook was collected without issue in under a minute.
-In order to classify posts, some initial data cleaning and NLP parsing were required before beginning to model using mostly Count Vectorizers and later TFIDF (Term Frequency Inverse Document Frequency) Vectorizers.
+I analyzed information obtained through Reddit's Pushshift API to categorize posts into either the Israel or Jewish subreddit. The data examined encompasses the most recent 2,000 posts (submissions) from either subreddit as of Thursday morning January 26th. As the limit for Reddit's Pushshift API is 200 requests per minute (with 500 posts/submissions per request), all of the data for this notebook was acquired without any difficulties in under a minute.
+To classify posts, some initial data cleaning and NLP processing were necessary before beginning to model using both Count Vectorizers and TFIDF (Term Frequency Inverse Document Frequency) Vectorizers. Seven different classification models were tested using various parameter search techniques and all but one with both types of vectorizer to determine which combination of vectorizer, model type, and hyperparameters produced the most accurate model.
+In the end, Random Forest and Logistic Regression yielded the most accurate predictions with similar accuracy scores. I selected the Logistic Regression model using the TFIDF Vectorizer as the transformer/model of preference to classify posts/submissions and address our problem statement.
+Based on the Logistic Regression model, it was found that the top 20 predictors of Jewish Subreddit were related to identity and culture, such as different forms of the words Jewish and Antisemism, and three different forms of Hannukkah (which can be explained by the date of data collection). Additionally, there were words related to popular culture, such as Kanye (on December 2022, Kanye West was accused of antisemitic behavior) and Jenna Ortega (star of Wednesday). 
+Israel and the IDF were among the top 20 predictors on the Israel Reddit, as well as words related to Israeli politics, like Netanyahu, Lapid, Coalition, and Knesset, and tourism (Tel Aviv).
 
-Six different classification models were tested using parameter search methods. All of them exceeded the baseline score (=0.51), but non resulted high accuracy score. The KNN model had the lowest score (=0.57), while the Logistic Regression yielded the most accurate predictions, with either TFIDF Vecotrizer or Count Vetorizer (=0.73 for either one of them).
-
-After running the Logistic Regression model, it was found that the top 20 predictors for both subreddits are common stop words.
     
 ### Conclusions & Recommendations
 
-The models all scored low in the end. A grid search improved the results, however, and expanding the grid search might result in better results. Additionally, it is worth exploring advanced classification models, such as boosting and Naive Bayes, in order to find the best prediction model.
+Based on the Logistic Regression model, it was found that the top 20 predictors of Jewish Subreddit were related to identity and culture, such as different forms of the words Jewish and Antisemism, and three different forms of Hannukkah (which can be explained by the date of data collection). Additionally, there were words related to popular culture, such as Kanye (on December 2022, Kanye West was accused of antisemitic behavior) and Jenna Ortega (star of Wednesday). 
+Israel and the IDF were among the top 20 predictors on the Israel Reddit, as well as words related to Israeli politics, like Netanyahu, Lapid, Coalition, and Knesset, and tourism (Tel Aviv).
